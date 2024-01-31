@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="el" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Λίστα Καθηγητών</title>
+    <style>
+        /* Προσθήκη CSS εδώ */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #4caf50;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        a {
+            text-decoration: none;
+            color: #4caf50;
+            margin-right: 10px;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <h2>Λίστα Καθηγητών</h2>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Επώνυμο</th>
+            <th>Όνομα</th>
+            <th>Ενέργειες</th> <!-- Νέα στήλη για τα κουμπιά ενέργειας -->
+        </tr>
+        <tr th:each="teacher : ${teachers}">
+            <td th:text="${teacher.id}"></td>
+            <td th:text="${teacher.sname}"></td>
+            <td th:text="${teacher.fname}"></td>
+            <td>
+                <!-- Κουμπί για ενημέρωση -->
+                <a th:href="@{/teachers/showFormForUpdate(teacherId=${teacher.id})}">Ενημέρωση</a>
+                
+                <!-- Κουμπί για διαγραφή -->
+                <a th:href="@{/teachers/delete(teacherId=${teacher.id})}" onclick="return confirm('Είστε σίγουροι;')">Διαγραφή</a>
+            </td>
+        </tr>
+    </table>
+    <a th:href="@{/teachers/showFormForAdd}">Προσθήκη Καθηγητή</a>
+</body>
+</html>

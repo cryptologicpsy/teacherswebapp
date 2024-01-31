@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="el" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Φόρμα Καθηγητή</title>
+    <style>
+        /* Προσθήκη CSS εδώ */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        form {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #4caf50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h2>Φόρμα Καθηγητή</h2>
+
+    <!-- Προσθήκη πεδίου αναζήτησης -->
+    <form action="#" th:action="@{/teachers/searchTeachers}" method="get">
+        <label for="search">Αναζήτηση Καθηγητή:</label>
+        <input type="text" id="search" name="surname" th:value="${surname}" required>
+        <button type="submit">Αναζήτηση</button>
+    </form>
+
+    <form action="#" th:action="@{/teachers/saveTeacher}" th:object="${teacher}" method="post">
+        <input type="hidden" th:field="*{id}">
+        <label for="sname">Επώνυμο:</label>
+        <input type="text" th:field="*{sname}" required>
+        <br>
+        <label for="fname">Όνομα:</label>
+        <input type="text" th:field="*{fname}" required>
+        <br>
+        <button type="submit">Αποθήκευση</button>
+    </form>
+    <a th:href="@{/teachers/list}">Λίστα Καθηγητών</a>
+
+</body>
+</html>
